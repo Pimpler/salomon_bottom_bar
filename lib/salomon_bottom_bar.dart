@@ -65,13 +65,9 @@ class SalomonBottomBar extends StatelessWidget {
               curve: curve,
               duration: duration,
               builder: (context, t, _) {
-                final _selectedColor = item.selectedColor ??
-                    selectedItemColor ??
-                    theme.primaryColor;
+                final _selectedColor = item.selectedColor ?? selectedItemColor ?? theme.primaryColor;
 
-                final _unselectedColor = item.unselectedColor ??
-                    unselectedItemColor ??
-                    theme.iconTheme.color;
+                final _unselectedColor = item.unselectedColor ?? unselectedItemColor ?? theme.iconTheme.color;
 
                 return Material(
                   color: Color.lerp(_selectedColor.withOpacity(0.0),
@@ -85,17 +81,17 @@ class SalomonBottomBar extends StatelessWidget {
                     splashColor: _selectedColor.withOpacity(0.1),
                     hoverColor: _selectedColor.withOpacity(0.1),
                     child: Padding(
-                      padding: itemPadding -
-                          EdgeInsets.only(right: itemPadding.right * t),
+                      padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
                           IconTheme(
                             data: IconThemeData(
-                              color: Color.lerp(
-                                  _unselectedColor, _selectedColor, t),
+                              color: Color.lerp(_unselectedColor, _selectedColor, t),
                               size: 24,
                             ),
-                            child: items.indexOf(item) == currentIndex ? (item.activeIcon ?? item.icon ?? SizedBox.shrink()) : (item.icon ?? SizedBox.shrink()),
+                            child: items.indexOf(item) == currentIndex
+                                ? (item.activeIcon ?? item.icon ?? SizedBox.shrink())
+                                : (item.icon ?? SizedBox.shrink()),
                           ),
                           ClipRect(
                             child: SizedBox(
@@ -108,15 +104,11 @@ class SalomonBottomBar extends StatelessWidget {
                                 alignment: Alignment(-0.2, 0.0),
                                 widthFactor: t,
                                 child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: itemPadding.right / 2,
-                                      right: itemPadding.right),
+                                  padding:
+                                      EdgeInsets.only(left: itemPadding.right / 2, right: itemPadding.right),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
-                                      color: Color.lerp(
-                                          _selectedColor.withOpacity(0.0),
-                                          _selectedColor,
-                                          t),
+                                      color: Color.lerp(_selectedColor.withOpacity(0.0), _selectedColor, t),
                                       fontWeight: FontWeight.w600,
                                     ),
                                     child: item.title ?? SizedBox.shrink(),
